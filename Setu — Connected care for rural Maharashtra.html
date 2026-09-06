@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0050)file:///C:/Users/nicec/Downloads/index.html#system -->
+<!-- saved from url=(0045)file:///C:/Users/nicec/Downloads/index_4.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,10 +57,28 @@
     display:flex; align-items:baseline; gap:8px;
   }
   .brand small{font-family:var(--sans); font-weight:400; font-size:0.72rem; color:var(--ink-soft);}
+  .nav{position:relative;}
   nav.links{display:flex; gap:30px; font-size:0.95rem;}
   nav.links a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
   nav.links a:hover{color:var(--teal);}
-  @media(max-width:760px){ nav.links{display:none;} }
+  nav.links a.active{color:var(--teal); font-weight:500;}
+  .menu-btn{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
+  .menu-btn span{width:22px; height:2px; background:var(--ink); display:block; transition:transform .2s, opacity .2s;}
+  .menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .menu-btn.open span:nth-child(2){opacity:0;}
+  .menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  @media(max-width:760px){
+    .menu-btn{display:flex;}
+    nav.links{
+      display:none; position:absolute; top:100%; left:0; right:0;
+      background:var(--paper); border-bottom:1px solid var(--line);
+      flex-direction:column; padding:6px 20px 18px; gap:0;
+      box-shadow:0 12px 24px rgba(20,40,35,0.08);
+    }
+    nav.links.open{display:flex;}
+    nav.links a{padding:12px 0; border-top:1px solid var(--line);}
+    nav.links a:first-child{border-top:none;}
+  }
 
   /* hero */
   .hero{padding:76px 0 40px;}
@@ -69,6 +87,7 @@
   @media(max-width:640px){ .hero h1{font-size:2.1rem;} }
   .hero .lede{margin-bottom:34px;}
   .tag-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:8px; font-size:0.85rem; color:var(--ink-soft);}
+  .tag-row span{border:1px solid var(--line); border-radius:100px; padding:5px 14px;}
 
   /* pathway diagram */
   .pathway{margin-top:56px;}
@@ -112,9 +131,48 @@
     align-items:start;
   }
   .journey-item .n{font-family:var(--serif); font-size:1.6rem; color:var(--marigold-deep);}
-  .journey-item h3{font-size:1.15rem; font-weight:500; margin-bottom:6px;}
+  .journey-item h3{font-size:1.15rem; font-weight:500;}
   .journey-item p{color:var(--ink-soft); font-size:0.96rem; max-width:36em;}
   @media(max-width:640px){ .journey-item{grid-template-columns:1fr; gap:4px;} }
+  .journey-toggle{display:flex; justify-content:space-between; align-items:center; gap:16px; width:100%; background:none; border:none; cursor:pointer; text-align:left; font:inherit; padding:0; color:inherit;}
+  .journey-toggle .chev{font-family:var(--serif); font-size:1.4rem; color:var(--marigold-deep); transition:transform .2s ease; flex-shrink:0;}
+  .journey-item.open .chev{transform:rotate(45deg);}
+  .journey-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .journey-item.open .journey-body{max-height:220px;}
+  .journey-body p{padding-top:10px;}
+
+  /* interactive demo cards */
+  .demo-grid{display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:16px;}
+  @media(max-width:800px){ .demo-grid{grid-template-columns:1fr;} }
+  .demo-card{background:var(--paper-dim); border:1px solid var(--line); border-radius:4px; padding:32px;}
+  .demo-card-head{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:6px; flex-wrap:wrap;}
+  .demo-card-head h3{font-size:1.2rem; font-weight:500;}
+  .lang-btn{background:none; border:1px solid var(--ink); border-radius:100px; padding:5px 14px; font-size:0.8rem; cursor:pointer; color:var(--ink); font-family:var(--sans);}
+  .lang-btn:hover{background:var(--ink); color:var(--paper);}
+  .demo-sub{color:var(--ink-soft); font-size:0.92rem; margin-bottom:18px;}
+  .symptom-grid{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:22px;}
+  .chip{border:1px solid var(--line); border-radius:100px; padding:8px 16px; font-size:0.88rem; cursor:pointer; display:flex; align-items:center; gap:8px; background:var(--paper); transition:border-color .15s, background .15s;}
+  .chip input{accent-color:var(--teal);}
+  .chip:has(input:checked){border-color:var(--teal); background:#DCEAE5;}
+  .urgency-row{margin-bottom:24px;}
+  .urgency-row > span{display:block; font-size:0.88rem; color:var(--ink-soft); margin-bottom:10px;}
+  .urgency-options{display:flex; gap:18px; font-size:0.9rem; flex-wrap:wrap;}
+  .urgency-options label{display:flex; align-items:center; gap:6px; cursor:pointer;}
+  .urgency-options input{accent-color:var(--teal);}
+  .triage-result{margin-top:22px; padding-top:20px; border-top:1px solid var(--line);}
+  .triage-result .tier{font-family:var(--serif); font-size:1.3rem; margin-bottom:8px;}
+  .triage-result .tier.level-1{color:var(--teal);}
+  .triage-result .tier.level-2{color:var(--marigold-deep);}
+  .triage-result .tier.level-3{color:var(--rust);}
+  .triage-result p{color:var(--ink-soft); font-size:0.92rem;}
+  .demo-note{font-size:0.76rem; color:var(--ink-soft); margin-top:18px; opacity:0.85;}
+  .btn.small{padding:8px 16px; font-size:0.8rem;}
+  .dash-stats{display:flex; gap:26px; margin-bottom:22px; flex-wrap:wrap;}
+  .dash-stats > div{min-width:96px;}
+  .dash-num{font-family:var(--serif); font-size:1.8rem; color:var(--ink); transition:opacity .15s;}
+  .dash-stats p{font-size:0.8rem; color:var(--ink-soft); margin-top:4px;}
+  #dashChart rect.bar{transition:height .5s ease, y .5s ease;}
+  #dashChart text{font-size:11px; fill:var(--ink-soft);}
 
   /* frontline split */
   .split{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;}
@@ -171,27 +229,32 @@
 <header>
   <div class="nav">
     <div class="brand">सेतु <small>Setu — connected rural care</small></div>
-    <nav class="links">
-      <a href="file:///C:/Users/nicec/Downloads/index.html#problem">The gap</a>
-      <a href="file:///C:/Users/nicec/Downloads/index.html#system">The system</a>
-      <a href="file:///C:/Users/nicec/Downloads/index.html#journey">Patient journey</a>
-      <a href="file:///C:/Users/nicec/Downloads/index.html#frontline">For health workers</a>
-      <a href="file:///C:/Users/nicec/Downloads/index.html#impact">Outcomes</a>
+    <nav class="links" id="navLinks">
+      <a href="file:///C:/Users/nicec/Downloads/index_4.html#problem" data-section="problem" class="">The gap</a>
+      <a href="file:///C:/Users/nicec/Downloads/index_4.html#system" data-section="system" class="">The system</a>
+      <a href="file:///C:/Users/nicec/Downloads/index_4.html#journey" data-section="journey" class="">Patient journey</a>
+      <a href="file:///C:/Users/nicec/Downloads/index_4.html#demo" data-section="demo" class="active">Try it</a>
+      <a href="file:///C:/Users/nicec/Downloads/index_4.html#frontline" data-section="frontline">For health workers</a>
+      <a href="file:///C:/Users/nicec/Downloads/index_4.html#impact" data-section="impact">Outcomes</a>
     </nav>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
     <div class="tag-row">
+      <span>SIH 2026 · PS 26133</span>
       <span>Govt. of Maharashtra — MSInS</span>
       <span>MedTech / BioTech / HealthTech</span>
     </div>
     <h1>One record should follow the patient — <em>not the other way around.</em></h1>
     <p class="lede">Setu is a care-access platform that links sub-centres, primary health centres, rural hospitals and district hospitals into a single continuous thread — so a patient's history, referral and follow-up travel with them, even where the network doesn't.</p>
     <div class="btn-row">
-      <a class="btn" href="file:///C:/Users/nicec/Downloads/index.html#system">See how it connects the system</a>
-      <a class="btn ghost" href="file:///C:/Users/nicec/Downloads/index.html#journey">Follow a patient's journey</a>
+      <a class="btn" href="file:///C:/Users/nicec/Downloads/index_4.html#system">See how it connects the system</a>
+      <a class="btn ghost" href="file:///C:/Users/nicec/Downloads/index_4.html#journey">Follow a patient's journey</a>
     </div>
 
     <div class="pathway">
@@ -230,6 +293,56 @@
     </div>
   </div>
 </section>
+<div class="demo-grid">
+      <div class="demo-card">
+        <div class="demo-card-head">
+          <h3>Digital triage assistant</h3>
+          <button class="lang-btn" id="langToggle" type="button">मराठी</button>
+        </div>
+        <p class="demo-sub" data-en="Select what the patient is experiencing, then how urgent it feels." data-mr="रुग्णाला काय होत आहे ते निवडा, नंतर किती तातडीचे वाटते ते सांगा.">Select what the patient is experiencing, then how urgent it feels.</p>
+
+        <div class="symptom-grid" id="symptomGrid">
+          <label class="chip"><input type="checkbox" data-weight="1" value="fever"><span data-en="Fever" data-mr="ताप">Fever</span></label>
+          <label class="chip"><input type="checkbox" data-weight="1" value="cough"><span data-en="Cough / breathlessness" data-mr="खोकला / धाप लागणे">Cough / breathlessness</span></label>
+          <label class="chip"><input type="checkbox" data-weight="3" value="chest"><span data-en="Chest pain" data-mr="छातीत दुखणे">Chest pain</span></label>
+          <label class="chip"><input type="checkbox" data-weight="2" value="pregnancy"><span data-en="Pregnancy-related" data-mr="गरोदरपणाशी संबंधित">Pregnancy-related</span></label>
+          <label class="chip"><input type="checkbox" data-weight="2" value="injury"><span data-en="Injury / bleeding" data-mr="दुखापत / रक्तस्राव">Injury / bleeding</span></label>
+          <label class="chip"><input type="checkbox" data-weight="2" value="chronic"><span data-en="Ongoing chronic condition" data-mr="दीर्घकालीन आजार">Ongoing chronic condition</span></label>
+        </div>
+
+        <div class="urgency-row">
+          <span data-en="How urgent does it feel?" data-mr="किती तातडीचे वाटते?">How urgent does it feel?</span>
+          <div class="urgency-options">
+            <label><input type="radio" name="urgency" value="1" checked=""><span data-en="Mild" data-mr="सौम्य">Mild</span></label>
+            <label><input type="radio" name="urgency" value="1.5"><span data-en="Moderate" data-mr="मध्यम">Moderate</span></label>
+            <label><input type="radio" name="urgency" value="2.2"><span data-en="Severe" data-mr="गंभीर">Severe</span></label>
+          </div>
+        </div>
+
+        <button class="btn" id="triageBtn" type="button" data-en="Get guidance" data-mr="मार्गदर्शन मिळवा">Get guidance</button>
+
+        <div class="triage-result" id="triageResult">
+          <div class="tier level-2" id="triageTier">Refer for teleconsultation / PHC</div>
+          <p id="triageReason">This combination is worth a specialist opinion. Route to assisted teleconsultation or the primary health centre.</p>
+        </div>
+        <p class="demo-note" data-en="Demo logic only, for illustration — not medical advice." data-mr="ही केवळ प्रात्यक्षिक तर्कप्रणाली आहे — वैद्यकीय सल्ला नाही.">Demo logic only, for illustration — not medical advice.</p>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-card-head">
+          <h3>Facility dashboard</h3>
+          <button class="btn ghost small" id="simulateBtn" type="button">Simulate a day</button>
+        </div>
+        <p class="demo-sub">A live read of load across the four tiers — the view an administrator would open each morning.</p>
+        <div class="dash-stats" id="dashStats">
+          <div><div class="dash-num" id="statWaiting">23</div><p>Patients waiting now</p></div>
+          <div><div class="dash-num" id="statTele">9</div><p>Teleconsultations today</p></div>
+          <div><div class="dash-num" id="statReferral">4</div><p>Referrals pending</p></div>
+        </div>
+        <svg id="dashChart" viewBox="0 0 400 190" width="100%" role="img" aria-label="Bar chart of patient load across facility tiers"><rect class="bar" x="35" y="85" width="54" height="65" rx="2" fill="var(--marigold)"></rect><text x="62" y="170" text-anchor="middle">Sub-centre</text><text x="62" y="77" text-anchor="middle" fill="var(--ink)" font-weight="500">59%</text><rect class="bar" x="129" y="52" width="54" height="98" rx="2" fill="var(--rust)"></rect><text x="156" y="170" text-anchor="middle">PHC</text><text x="156" y="44" text-anchor="middle" fill="var(--ink)" font-weight="500">89%</text><rect class="bar" x="223" y="107" width="54" height="43" rx="2" fill="var(--teal)"></rect><text x="250" y="170" text-anchor="middle">Rural hosp.</text><text x="250" y="99" text-anchor="middle" fill="var(--ink)" font-weight="500">39%</text><rect class="bar" x="317" y="81" width="54" height="69" rx="2" fill="var(--marigold)"></rect><text x="344" y="170" text-anchor="middle">District hosp.</text><text x="344" y="73" text-anchor="middle" fill="var(--ink)" font-weight="500">63%</text><line x1="20" y1="150" x2="380" y2="150" stroke="var(--line)" stroke-width="1"></line></svg>
+      </div>
+    </div>
+  </div>
 
 <section id="problem">
   <div class="wrap">
@@ -281,29 +394,54 @@
       <h2>One referral, followed end to end</h2>
       <p class="lede">A working example of what changes for a patient moving from a village sub-centre to specialist care.</p>
     </div>
-    <div class="journey-list">
-      <div class="journey-item">
+    <div class="journey-list" id="journeyList">
+      <div class="journey-item open">
         <div class="n">01</div>
-        <div><h3>Seen at the sub-centre</h3><p>An ASHA or health worker records symptoms through digital triage in the patient's own language. The system suggests whether this needs local care or a referral up the chain.</p></div>
+        <div>
+          <button class="journey-toggle" aria-expanded="true"><h3>Seen at the sub-centre</h3><span class="chev">+</span></button>
+          <div class="journey-body"><p>An ASHA or health worker records symptoms through digital triage in the patient's own language. The system suggests whether this needs local care or a referral up the chain.</p></div>
+        </div>
       </div>
       <div class="journey-item">
         <div class="n">02</div>
-        <div><h3>Connected to a specialist</h3><p>Where a specialist isn't on-site, assisted teleconsultation brings one in over the available connection — audio-first if that's all the signal allows.</p></div>
+        <div>
+          <button class="journey-toggle" aria-expanded="false"><h3>Connected to a specialist</h3><span class="chev">+</span></button>
+          <div class="journey-body"><p>Where a specialist isn't on-site, assisted teleconsultation brings one in over the available connection — audio-first if that's all the signal allows.</p></div>
+        </div>
       </div>
       <div class="journey-item">
         <div class="n">03</div>
-        <div><h3>Referred with context intact</h3><p>If escalation is needed, the referral travels with the patient's record attached — the receiving facility isn't starting from zero.</p></div>
+        <div>
+          <button class="journey-toggle" aria-expanded="false"><h3>Referred with context intact</h3><span class="chev">+</span></button>
+          <div class="journey-body"><p>If escalation is needed, the referral travels with the patient's record attached — the receiving facility isn't starting from zero.</p></div>
+        </div>
       </div>
       <div class="journey-item">
         <div class="n">04</div>
-        <div><h3>Diagnostics and medicine confirmed ahead</h3><p>Before the patient travels, the system checks the test can actually be run and the medicine is in stock at the destination.</p></div>
+        <div>
+          <button class="journey-toggle" aria-expanded="false"><h3>Diagnostics and medicine confirmed ahead</h3><span class="chev">+</span></button>
+          <div class="journey-body"><p>Before the patient travels, the system checks the test can actually be run and the medicine is in stock at the destination.</p></div>
+        </div>
       </div>
       <div class="journey-item">
         <div class="n">05</div>
-        <div><h3>Followed up, not filed away</h3><p>If flagged high-risk, the patient is checked on after discharge — and that outcome is written back to the same longitudinal record where it started.</p></div>
+        <div>
+          <button class="journey-toggle" aria-expanded="false"><h3>Followed up, not filed away</h3><span class="chev">+</span></button>
+          <div class="journey-body"><p>If flagged high-risk, the patient is checked on after discharge — and that outcome is written back to the same longitudinal record where it started.</p></div>
+        </div>
       </div>
     </div>
   </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="section-head col">
+      <h2>Try two pieces of the system</h2>
+      <p class="lede">Small working versions of two modules from above — not the full clinical engine, but enough to feel how the idea behaves.</p>
+    </div>
+
+    
 </section>
 
 <section id="frontline">
@@ -371,7 +509,7 @@
 </footer>
 
 <script>
-  // single orchestrated reveal: draw the "connected" pathway line once, on load
+  // draw the "connected" pathway line once, on load
   window.addEventListener('DOMContentLoaded', () => {
     const line = document.querySelector('#setu-row .draw');
     if(line){
@@ -381,6 +519,131 @@
       });
     }
   });
+
+  // mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuBtn.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // scroll-spy active nav link
+  const sections = [...document.querySelectorAll('section[id]')];
+  const navByLinkMap = {};
+  navLinks.querySelectorAll('a[data-section]').forEach(a => navByLinkMap[a.dataset.section] = a);
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = navByLinkMap[entry.target.id];
+      if(!link) return;
+      if(entry.isIntersecting){
+        Object.values(navByLinkMap).forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(s => spyObserver.observe(s));
+
+  // journey accordion
+  document.querySelectorAll('.journey-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.journey-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.journey-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.journey-toggle').setAttribute('aria-expanded', 'false');
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // language toggle for the triage demo
+  let lang = 'en';
+  const langToggle = document.getElementById('langToggle');
+  langToggle.addEventListener('click', () => {
+    lang = lang === 'en' ? 'mr' : 'en';
+    langToggle.textContent = lang === 'en' ? 'मराठी' : 'English';
+    document.querySelectorAll('#demo [data-en]').forEach(el => {
+      el.textContent = el.dataset[lang];
+    });
+  });
+
+  // triage assistant logic
+  const triageBtn = document.getElementById('triageBtn');
+  const triageResult = document.getElementById('triageResult');
+  const triageTier = document.getElementById('triageTier');
+  const triageReason = document.getElementById('triageReason');
+  const TIERS = {
+    en: {
+      1: ['Manage at the sub-centre', 'Selected symptoms look mild. Local care and routine monitoring should be enough for now.'],
+      2: ['Refer for teleconsultation / PHC', 'This combination is worth a specialist opinion. Route to assisted teleconsultation or the primary health centre.'],
+      3: ['Escalate now — refer toward rural / district hospital', 'This combination is flagged high-risk. Skip the queue and start the referral immediately.']
+    },
+    mr: {
+      1: ['उपकेंद्रात व्यवस्थापन करा', 'निवडलेली लक्षणे सौम्य वाटतात. सध्या स्थानिक काळजी आणि नियमित निरीक्षण पुरेसे आहे.'],
+      2: ['टेलिकन्सल्टेशन / प्राथमिक आरोग्य केंद्राकडे पाठवा', 'या लक्षणांसाठी तज्ञांचा सल्ला घेणे योग्य आहे. टेलिकन्सल्टेशन किंवा प्राथमिक आरोग्य केंद्राकडे पाठवा.'],
+      3: ['तातडीने पुढे पाठवा — ग्रामीण / जिल्हा रुग्णालयाकडे रेफर करा', 'हे मिश्रण उच्च-जोखमीचे मानले आहे. रांग टाळून त्वरित रेफरल सुरू करा.']
+    }
+  };
+  triageBtn.addEventListener('click', () => {
+    const checked = [...document.querySelectorAll('#symptomGrid input:checked')];
+    const urgency = parseFloat(document.querySelector('input[name="urgency"]:checked').value);
+    if(checked.length === 0){
+      triageResult.hidden = false;
+      triageTier.textContent = lang === 'en' ? 'Select at least one symptom' : 'किमान एक लक्षण निवडा';
+      triageTier.className = 'tier';
+      triageReason.textContent = '';
+      return;
+    }
+    const chestSelected = checked.some(c => c.value === 'chest');
+    const weightSum = checked.reduce((sum, c) => sum + parseFloat(c.dataset.weight), 0);
+    let score = weightSum * urgency;
+    let level = score < 2.5 ? 1 : score < 6 ? 2 : 3;
+    if(chestSelected && urgency >= 2.2) level = 3; // safety override
+    const [label, reason] = TIERS[lang][level];
+    triageResult.hidden = false;
+    triageTier.textContent = label;
+    triageTier.className = 'tier level-' + level;
+    triageReason.textContent = reason;
+  });
+
+  // facility dashboard demo
+  const TIER_LABELS = ['Sub-centre', 'PHC', 'Rural hosp.', 'District hosp.'];
+  const dashChart = document.getElementById('dashChart');
+  function renderDashboard(loads){
+    const chartW = 400, chartH = 190, baseline = 150, barW = 54, gap = 40;
+    const startX = 35;
+    let svg = '';
+    loads.forEach((pct, i) => {
+      const x = startX + i * (barW + gap);
+      const h = Math.round((pct/100) * 110);
+      const y = baseline - h;
+      const color = pct > 75 ? 'var(--rust)' : pct > 45 ? 'var(--marigold)' : 'var(--teal)';
+      svg += `<rect class="bar" x="${x}" y="${y}" width="${barW}" height="${h}" rx="2" fill="${color}"></rect>`;
+      svg += `<text x="${x + barW/2}" y="${baseline + 20}" text-anchor="middle">${TIER_LABELS[i]}</text>`;
+      svg += `<text x="${x + barW/2}" y="${y - 8}" text-anchor="middle" fill="var(--ink)" font-weight="500">${pct}%</text>`;
+    });
+    svg += `<line x1="20" y1="${baseline}" x2="380" y2="${baseline}" stroke="var(--line)" stroke-width="1"></line>`;
+    dashChart.innerHTML = svg;
+  }
+  function simulateDay(){
+    const loads = TIER_LABELS.map(() => Math.round(20 + Math.random() * 75));
+    renderDashboard(loads);
+    document.getElementById('statWaiting').textContent = Math.round(8 + Math.random() * 40);
+    document.getElementById('statTele').textContent = Math.round(3 + Math.random() * 18);
+    document.getElementById('statReferral').textContent = Math.round(1 + Math.random() * 9);
+  }
+  document.getElementById('simulateBtn').addEventListener('click', simulateDay);
+  simulateDay();
 </script>
 
 
