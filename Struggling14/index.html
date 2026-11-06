@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card {
+            height: 25vh;
+            display: flex;
+            flex-direction: row;
+            align-items:center;
+            column-gap: 20px;
+        }
+
+        .image {
+            position: relative;
+            display: inline-block;
+        }
+
+        .time {
+            position: absolute;
+            right: 8px;
+            bottom: 8px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            background-color: black;
+            color: aliceblue;
+            font-size: 30px;
+        }
+        .nav{
+            display: grid;
+            grid-template-rows: 50px 50px ;
+            grid-template-columns: 120px 120px 120px;
+            grid-row-start: 5px;
+            row-gap: 50px;
+        }
+        .title{
+            grid-column: 1 / span 3;
+            font-size: 45px;
+            }
+        .cname{
+            color: rgba(40, 39, 39, 0.571);
+            font-size: 24px;
+            text-overflow: ellipsis;
+        }
+        .views{
+            color: rgba(40, 39, 39, 0.571);
+            font-size: 24px;
+        }
+        .months{
+            color: rgba(40, 39, 39, 0.571);
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="image"><img
+                    src="https://i.ytimg.com/vi/CO_DAXswOrc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCSBvYvqbGE-MvssOtJ037kSGnEgA"
+                    alt="Img" style="height: 25vh">
+                <span class="time">
+                   
+                </span>
+            </div>
+            <div class="nav">
+                <div class="title">
+                </div>
+                <div class="cname">
+                </div>
+                <div class="views">
+                </div>
+                <div class="months">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
