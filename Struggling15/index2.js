@@ -17,7 +17,7 @@
 //     .then((data) => console.log("data:", data))
 //     .catch((error) => console.error("error:", error));;
 async function getData() {
-  const url = "https://www.xvideos.com/tags/xxx/2";
+  const url = "https://example.org/products.json";
   try {
     const response = await fetch(url);
     if (!response.ok) {
